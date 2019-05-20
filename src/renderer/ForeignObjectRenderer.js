@@ -74,7 +74,7 @@ export const createForeignObjectSVG = (
 export const loadSerializedSVG = (svg: Node) => {
     return new Promise((resolve, reject) => {
         const img = new Image();
-        img.onload = () => resolve(img);
+        // img.onload = () => resolve(img);
         img.onerror = reject;
 
         img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(

@@ -221,7 +221,7 @@ const isSVG = (src: string): boolean =>
 const loadImage = (src: string, timeout: number): Promise<Image> => {
     return new Promise((resolve, reject) => {
         const img = new Image();
-        img.onload = () => resolve(img);
+        // img.onload = () => resolve(img);
         img.onerror = reject;
         img.src = src;
         if (img.complete === true) {
