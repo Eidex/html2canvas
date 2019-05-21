@@ -668,7 +668,7 @@ export const cloneWindow = (
 
         return iframeLoad;
     });
-    cloner = null;
+    //cloner = null;
 };
 
 const serializeDoctype = (doctype: ?DocumentType): string => {
