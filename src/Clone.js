@@ -271,9 +271,9 @@ export class DocumentCloner {
         const styleAfter =
             node instanceof window.HTMLElement ? window.getComputedStyle(node, ':after') : null;
 
-        // if (this.referenceElement === node && clone instanceof window.HTMLElement) {
-        //     this.clonedReferenceElement = clone;
-        // }
+        if (this.referenceElement === node && clone instanceof window.HTMLElement) {
+            this.clonedReferenceElement = clone;
+        }
 
         // NS: make clean slate
         if (clone instanceof window.HTMLBodyElement) {
@@ -544,9 +544,10 @@ const getIframeDocumentElement = (
 
                           documentClone.open();
                           documentClone.write(html);
-                          const iframeLoad = iframeLoader(cloneIframeContainer).then(
-                              () => documentClone.documentElement
-                          );
+                          const iframeLoad = iframeLoader(cloneIframeContainer)
+                        //   .then(
+                        //       () => documentClone.documentElement
+                        //   );
 
                           documentClone.close();
                           return iframeLoad;

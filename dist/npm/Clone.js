@@ -263,10 +263,12 @@ function () {
 
       var style = node instanceof window.HTMLElement ? window.getComputedStyle(node) : null;
       var styleBefore = node instanceof window.HTMLElement ? window.getComputedStyle(node, ':before') : null;
-      var styleAfter = node instanceof window.HTMLElement ? window.getComputedStyle(node, ':after') : null; // if (this.referenceElement === node && clone instanceof window.HTMLElement) {
-      //     this.clonedReferenceElement = clone;
-      // }
-      // NS: make clean slate
+      var styleAfter = node instanceof window.HTMLElement ? window.getComputedStyle(node, ':after') : null;
+
+      if (this.referenceElement === node && clone instanceof window.HTMLElement) {
+        this.clonedReferenceElement = clone;
+      } // NS: make clean slate
+
 
       if (clone instanceof window.HTMLBodyElement) {
         // ns: make content = "", display = "none"
@@ -505,9 +507,10 @@ var getIframeDocumentElement = function getIframeDocumentElement(node, options) 
         var documentClone = cloneWindow.document;
         documentClone.open();
         documentClone.write(html);
-        var iframeLoad = iframeLoader(cloneIframeContainer).then(function () {
-          return documentClone.documentElement;
-        });
+        var iframeLoad = iframeLoader(cloneIframeContainer); //   .then(
+        //       () => documentClone.documentElement
+        //   );
+
         documentClone.close();
         return iframeLoad;
       });
