@@ -264,23 +264,29 @@ export class DocumentCloner {
                 : this.createElementClone(node);
 
         const window = node.ownerDocument.defaultView;
+        // NS: access CSS of node
         const style = node instanceof window.HTMLElement ? window.getComputedStyle(node) : null;
         const styleBefore =
             node instanceof window.HTMLElement ? window.getComputedStyle(node, ':before') : null;
         const styleAfter =
             node instanceof window.HTMLElement ? window.getComputedStyle(node, ':after') : null;
 
-        if (this.referenceElement === node && clone instanceof window.HTMLElement) {
-            this.clonedReferenceElement = clone;
-        }
+        // if (this.referenceElement === node && clone instanceof window.HTMLElement) {
+        //     this.clonedReferenceElement = clone;
+        // }
 
+        // NS: make clean slate
         if (clone instanceof window.HTMLBodyElement) {
+            // ns: make content = "", display = "none"
             createPseudoHideStyles(clone);
         }
 
         const counters = parseCounterReset(style, this.pseudoContentData);
         const contentBefore = resolvePseudoContent(node, styleBefore, this.pseudoContentData);
 
+        // NS: loop through all children
+        // if we don't want to ignore
+        // then append to clone
         for (let child = node.firstChild; child; child = child.nextSibling) {
             if (
                 child.nodeType !== Node.ELEMENT_NODE ||
@@ -290,7 +296,7 @@ export class DocumentCloner {
                     (typeof this.options.ignoreElements !== 'function' ||
                         // $FlowFixMe
                         !this.options.ignoreElements(child)))
-            ) {
+            ) { 
                 if (!this.copyStyles || child.nodeName !== 'STYLE') {
                     clone.appendChild(this.cloneNode(child));
                 }

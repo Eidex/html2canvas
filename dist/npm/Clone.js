@@ -259,21 +259,24 @@ function () {
     key: "cloneNode",
     value: function cloneNode(node) {
       var clone = node.nodeType === Node.TEXT_NODE ? document.createTextNode(node.nodeValue) : this.createElementClone(node);
-      var window = node.ownerDocument.defaultView;
+      var window = node.ownerDocument.defaultView; // NS: access CSS of node
+
       var style = node instanceof window.HTMLElement ? window.getComputedStyle(node) : null;
       var styleBefore = node instanceof window.HTMLElement ? window.getComputedStyle(node, ':before') : null;
-      var styleAfter = node instanceof window.HTMLElement ? window.getComputedStyle(node, ':after') : null;
-
-      if (this.referenceElement === node && clone instanceof window.HTMLElement) {
-        this.clonedReferenceElement = clone;
-      }
+      var styleAfter = node instanceof window.HTMLElement ? window.getComputedStyle(node, ':after') : null; // if (this.referenceElement === node && clone instanceof window.HTMLElement) {
+      //     this.clonedReferenceElement = clone;
+      // }
+      // NS: make clean slate
 
       if (clone instanceof window.HTMLBodyElement) {
+        // ns: make content = "", display = "none"
         createPseudoHideStyles(clone);
       }
 
       var counters = (0, _PseudoNodeContent.parseCounterReset)(style, this.pseudoContentData);
-      var contentBefore = (0, _PseudoNodeContent.resolvePseudoContent)(node, styleBefore, this.pseudoContentData);
+      var contentBefore = (0, _PseudoNodeContent.resolvePseudoContent)(node, styleBefore, this.pseudoContentData); // NS: loop through all children
+      // if we don't want to ignore
+      // then append to clone
 
       for (var child = node.firstChild; child; child = child.nextSibling) {
         if (child.nodeType !== Node.ELEMENT_NODE || child.nodeName !== 'SCRIPT' && // $FlowFixMe
