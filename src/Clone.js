@@ -538,13 +538,14 @@ const getIframeDocumentElement = (
                       createIframeContainer(
                           node.ownerDocument,
                           parseBounds(node, 0, 0)
-                      ).then(cloneIframeContainer => {
+                      ).then( async cloneIframeContainer => {
                           const cloneWindow = cloneIframeContainer.contentWindow;
                           const documentClone = cloneWindow.document;
 
                           documentClone.open();
                           documentClone.write(html);
-                          const iframeLoad = iframeLoader(cloneIframeContainer)
+                          await iframeLoader(cloneIframeContainer)
+                          const iframeLoad = documentClone.documentElement;
                         //   .then(
                         //       () => documentClone.documentElement
                         //   );

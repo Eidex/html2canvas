@@ -21,6 +21,10 @@ var _PseudoNodeContent = require("./PseudoNodeContent");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -502,18 +506,44 @@ var getIframeDocumentElement = function getIframeDocumentElement(node, options) 
 
       return match[2] === 'base64' ? window.atob(decodeURIComponent(match[3])) : decodeURIComponent(match[3]);
     }).then(function (html) {
-      return createIframeContainer(node.ownerDocument, (0, _Bounds.parseBounds)(node, 0, 0)).then(function (cloneIframeContainer) {
-        var cloneWindow = cloneIframeContainer.contentWindow;
-        var documentClone = cloneWindow.document;
-        documentClone.open();
-        documentClone.write(html);
-        var iframeLoad = iframeLoader(cloneIframeContainer); //   .then(
-        //       () => documentClone.documentElement
-        //   );
+      return createIframeContainer(node.ownerDocument, (0, _Bounds.parseBounds)(node, 0, 0)).then(
+      /*#__PURE__*/
+      function () {
+        var _ref3 = _asyncToGenerator(
+        /*#__PURE__*/
+        regeneratorRuntime.mark(function _callee(cloneIframeContainer) {
+          var cloneWindow, documentClone, iframeLoad;
+          return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  cloneWindow = cloneIframeContainer.contentWindow;
+                  documentClone = cloneWindow.document;
+                  documentClone.open();
+                  documentClone.write(html);
+                  _context.next = 6;
+                  return iframeLoader(cloneIframeContainer);
 
-        documentClone.close();
-        return iframeLoad;
-      });
+                case 6:
+                  iframeLoad = documentClone.documentElement; //   .then(
+                  //       () => documentClone.documentElement
+                  //   );
+
+                  documentClone.close();
+                  return _context.abrupt("return", iframeLoad);
+
+                case 9:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
+
+        return function (_x) {
+          return _ref3.apply(this, arguments);
+        };
+      }());
     }) : Promise.reject();
   }
 };
