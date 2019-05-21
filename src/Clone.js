@@ -545,9 +545,10 @@ const getIframeDocumentElement = (
                           documentClone.open();
                           documentClone.write(html);
                           const iframeLoad = iframeLoader(cloneIframeContainer)
-                        //   .then(
-                        //       () => documentClone.documentElement
-                        //   );
+                          // REMOVE THIS THEN
+                          .then(
+                              () => documentClone.documentElement
+                          );
 
                           documentClone.close();
                           return iframeLoad;
@@ -668,7 +669,6 @@ export const cloneWindow = (
 
         return iframeLoad;
     });
-    //cloner = null;
 };
 
 const serializeDoctype = (doctype: ?DocumentType): string => {

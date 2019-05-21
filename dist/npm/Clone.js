@@ -507,10 +507,10 @@ var getIframeDocumentElement = function getIframeDocumentElement(node, options) 
         var documentClone = cloneWindow.document;
         documentClone.open();
         documentClone.write(html);
-        var iframeLoad = iframeLoader(cloneIframeContainer); //   .then(
-        //       () => documentClone.documentElement
-        //   );
-
+        var iframeLoad = iframeLoader(cloneIframeContainer) // REMOVE THIS THEN
+        .then(function () {
+          return documentClone.documentElement;
+        });
         documentClone.close();
         return iframeLoad;
       });
@@ -591,7 +591,7 @@ var cloneWindow = function cloneWindow(ownerDocument, bounds, referenceElement, 
     documentClone.replaceChild(documentClone.adoptNode(cloner.documentElement), documentClone.documentElement);
     documentClone.close();
     return iframeLoad;
-  }); //cloner = null;
+  });
 };
 
 exports.cloneWindow = cloneWindow;
