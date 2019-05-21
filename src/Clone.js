@@ -665,6 +665,7 @@ export const cloneWindow = (
             documentClone.documentElement
         );
         documentClone.close();
+        cloner = null;
 
         return iframeLoad;
     });

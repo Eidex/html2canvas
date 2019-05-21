@@ -21,6 +21,8 @@ var _PseudoNodeContent = require("./PseudoNodeContent");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _readOnlyError(name) { throw new Error("\"" + name + "\" is read-only"); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -590,6 +592,7 @@ var cloneWindow = function cloneWindow(ownerDocument, bounds, referenceElement, 
     restoreOwnerScroll(referenceElement.ownerDocument, scrollX, scrollY);
     documentClone.replaceChild(documentClone.adoptNode(cloner.documentElement), documentClone.documentElement);
     documentClone.close();
+    cloner = (_readOnlyError("cloner"), null);
     return iframeLoad;
   });
 };
