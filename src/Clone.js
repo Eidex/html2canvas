@@ -665,10 +665,10 @@ export const cloneWindow = (
             documentClone.documentElement
         );
         documentClone.close();
-        cloner = null;
 
         return iframeLoad;
     });
+    cloner = null;
 };
 
 const serializeDoctype = (doctype: ?DocumentType): string => {

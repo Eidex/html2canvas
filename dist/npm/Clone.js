@@ -592,9 +592,9 @@ var cloneWindow = function cloneWindow(ownerDocument, bounds, referenceElement, 
     restoreOwnerScroll(referenceElement.ownerDocument, scrollX, scrollY);
     documentClone.replaceChild(documentClone.adoptNode(cloner.documentElement), documentClone.documentElement);
     documentClone.close();
-    cloner = (_readOnlyError("cloner"), null);
     return iframeLoad;
   });
+  cloner = (_readOnlyError("cloner"), null);
 };
 
 exports.cloneWindow = cloneWindow;
