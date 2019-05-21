@@ -545,10 +545,9 @@ const getIframeDocumentElement = (
                           documentClone.open();
                           documentClone.write(html);
                           const iframeLoad = iframeLoader(cloneIframeContainer)
-                          // REMOVE THIS THEN
-                          .then(
-                              () => documentClone.documentElement
-                          );
+                        //   .then(
+                        //       () => documentClone.documentElement
+                        //   );
 
                           documentClone.close();
                           return iframeLoad;
