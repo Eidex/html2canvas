@@ -43,6 +43,7 @@ export default class ForeignObjectRenderer {
             try {
                 this.ctx.drawImage(img, -options.x * options.scale, -options.y * options.scale);
             } catch {
+                let img = new Image;
                 this.ctx.drawImage(img, 0, 0);
             }
             return this.canvas;

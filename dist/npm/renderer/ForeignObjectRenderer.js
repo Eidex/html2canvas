@@ -45,7 +45,9 @@ function () {
         try {
           _this.ctx.drawImage(img, -options.x * options.scale, -options.y * options.scale);
         } catch (_unused) {
-          _this.ctx.drawImage(img, 0, 0);
+          var _img = new Image();
+
+          _this.ctx.drawImage(_img, 0, 0);
         }
 
         return _this.canvas;

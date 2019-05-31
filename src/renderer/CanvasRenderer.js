@@ -89,7 +89,8 @@ export default class CanvasRenderer implements RenderTarget<HTMLCanvasElement> {
                 destination.height
             );
         } catch {
-            this.ctx.drawImage(image, 0, 0);
+            let img = new Image;
+            this.ctx.drawImage(img, 0, 0);
         }
     }
 
