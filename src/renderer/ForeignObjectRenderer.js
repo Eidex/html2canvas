@@ -40,7 +40,11 @@ export default class ForeignObjectRenderer {
                 );
             }
 
-            this.ctx.drawImage(img, -options.x * options.scale, -options.y * options.scale);
+            try {
+                this.ctx.drawImage(img, -options.x * options.scale, -options.y * options.scale);
+            } catch {
+                this.ctx.drawImage(img, 0, 0);
+            }
             return this.canvas;
         });
     }

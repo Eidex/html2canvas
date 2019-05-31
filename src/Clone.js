@@ -539,20 +539,20 @@ const getIframeDocumentElement = (
                           node.ownerDocument,
                           parseBounds(node, 0, 0)
                       ).then( async cloneIframeContainer => {
-                          const cloneWindow = cloneIframeContainer.contentWindow;
-                          const documentClone = cloneWindow.document;
+                        const cloneWindow = cloneIframeContainer.contentWindow;
+                        const documentClone = cloneWindow.document;
 
-                          documentClone.open();
-                          documentClone.write(html);
-                          await iframeLoader(cloneIframeContainer)
-                          const iframeLoad = documentClone.documentElement;
+                        documentClone.open();
+                        documentClone.write(html);
+                        await iframeLoader(cloneIframeContainer)
+                        const iframeLoad = documentClone.documentElement;
                         //   .then(
                         //       () => documentClone.documentElement
                         //   );
 
-                          documentClone.close();
-                          return iframeLoad;
-                      })
+                        documentClone.close();
+                        return iframeLoad;
+                    })
                   )
             : Promise.reject();
     }

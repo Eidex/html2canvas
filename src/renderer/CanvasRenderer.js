@@ -76,17 +76,21 @@ export default class CanvasRenderer implements RenderTarget<HTMLCanvasElement> {
     }
 
     drawImage(image: ImageElement, source: Bounds, destination: Bounds) {
-        this.ctx.drawImage(
-            image,
-            source.left,
-            source.top,
-            source.width,
-            source.height,
-            destination.left,
-            destination.top,
-            destination.width,
-            destination.height
-        );
+        try {
+            this.ctx.drawImage(
+                image,
+                source.left,
+                source.top,
+                source.width,
+                source.height,
+                destination.left,
+                destination.top,
+                destination.width,
+                destination.height
+            );
+        } catch {
+            this.ctx.drawImage(img, 0, 0);
+        }
     }
 
     drawShape(path: Path, color: Color) {
