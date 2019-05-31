@@ -74,7 +74,7 @@ function () {
       try {
         this.ctx.drawImage(image, source.left, source.top, source.width, source.height, destination.left, destination.top, destination.width, destination.height);
       } catch (_unused) {
-        this.ctx.drawImage(img, 0, 0);
+        this.ctx.drawImage(image, 0, 0);
       }
     }
   }, {
